@@ -17,13 +17,15 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	
 	public Game(){
-		new Window(WIDTH, HEIGHT, "Game!", this);
 		
 		handler = new Handler();
 		
-		handler.addObject(new Player(100, 100, ID.Player));
-		handler.addObject(new Player(200, 200, ID.Player));
-		handler.addObject(new Player(300, 300, ID.Player));
+		this.addKeyListener(new KeyInput(handler));
+		
+		new Window(WIDTH, HEIGHT, "Game!", this);
+		
+		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player));
+		handler.addObject(new Enemy(WIDTH / 2 - 100, HEIGHT / 2 - 32, ID.Enemy));
 	}
 	
 	public synchronized void start(){

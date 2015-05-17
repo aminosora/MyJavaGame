@@ -8,7 +8,6 @@ public class Player extends GameObject {
 	public Player(int x, int y, ID id){
 		super(x, y, id);
 		
-		velX = 1;
 	}
 	
 	public void tick(){
@@ -17,7 +16,7 @@ public class Player extends GameObject {
 	}
 	
 	public void render(Graphics g){
-		g.setColor(Color.white);
+		if(id == ID.Player) g.setColor(Color.white);
 		g.fillRect(x, y, 32, 32);
 	}
 }
