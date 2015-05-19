@@ -5,18 +5,18 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 //import java.util.Random;
 
-public class BasicEnemy extends GameObject {
+public class FastEnemy extends GameObject {
 
 	private Handler handler;
 	//private Random r;
 	
-	public BasicEnemy(int x, int y, ID id, Handler handler) {
+	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		
 		this.handler = handler;
 		
-		velX = 5;
-		velY = 5;
+		velX = 2;
+		velY = 9;
 	}
 
 	public void tick() {
@@ -26,11 +26,11 @@ public class BasicEnemy extends GameObject {
 		if(y <= 0 || y >= Game.HEIGHT - 50) velY *= -1;
 		if(x <= 0 || x >= Game.WIDTH - 20) velX *= -1;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.019f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.cyan, 16, 16, 0.019f, handler));
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(Color.CYAN);
 		g.fillRect(x, y, 16, 16);
 	}
 

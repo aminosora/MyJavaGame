@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable {
 	private Random r;
 	private Handler handler;
 	private HUD hud;
+	private Spawn spawn;
 	
 	public Game(){
 		
@@ -30,14 +31,11 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Game!", this);
 		
 		hud = new HUD();
+		spawn = new Spawn(handler, hud);
+		r = new Random();
 		
 		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
+		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
 	}
 	
 	public synchronized void start(){
@@ -87,6 +85,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick(){
 		handler.tick();
 		hud.tick();
+		spawn.tick();
 	}
 	
 	private void render(){
