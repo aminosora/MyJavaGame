@@ -22,6 +22,8 @@ public class Player extends GameObject {
 		
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, 32, 32, 0.07f, handler));
 		
+		HUD.HEALTH += 0.03;
+		
 		collision();
 	}
 	
@@ -35,16 +37,12 @@ public class Player extends GameObject {
 				if(getBounds().intersects(tempObject.getBounds())){
 					HUD.HEALTH -= 2;
 				}
-				else{
-					HUD.HEALTH += 0.03;
-				}
 			}
 			else if(tempObject.getID() == ID.BossEnemy){
 				if(getBounds().intersects(tempObject.getBounds())){
 					HUD.HEALTH -= 10;
 				}
 			}
-			
 		}
 	}
 	
