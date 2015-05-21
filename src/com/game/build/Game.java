@@ -12,21 +12,29 @@ public class Game extends Canvas implements Runnable {
 	
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 	
-	private Thread thread;
 	private boolean running = false;
 	
+	private Thread thread;
 	private Random r;
 	private Handler handler;
 	private HUD hud;
 	private Spawn spawn;
+	private Menu menu;
+	
+	public enum STATE {
+		Menu,
+		Game,
+		Help
+	};
+	
+	public STATE gameState = STATE.Menu;
 	
 	public Game(){
 		
 		handler = new Handler();
-		
-		this.r = new Random();
-		
+		menu = new Menu(this, handler);
 		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(menu);
 		
 		new Window(WIDTH, HEIGHT, "Game!", this);
 		
@@ -34,8 +42,12 @@ public class Game extends Canvas implements Runnable {
 		spawn = new Spawn(handler, hud);
 		r = new Random();
 		
-		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-		handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+		if(gameState == STATE.Game){
+			
+			handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
+			handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+			
+		}
 		
 	}
 	
@@ -85,8 +97,12 @@ public class Game extends Canvas implements Runnable {
 	
 	private void tick(){
 		handler.tick();
-		hud.tick();
-		spawn.tick();
+		if(gameState == STATE.Game){
+			hud.tick();
+			spawn.tick();
+		}else if(gameState == STATE.Menu){
+			menu.tick();
+		}
 	}
 	
 	private void render(){
@@ -103,10 +119,13 @@ public class Game extends Canvas implements Runnable {
 		
 		handler.render(g);
 		
-		hud.render(g);
-		
-		g.dispose();
-		bs.show();
+		if(gameState == STATE.Game) { hud.render(g); }
+		else if(gameState == STATE.Menu || gameState == STATE.Help){
+			menu.render(g);
+		}
+
+			g.dispose();
+			bs.show();
 	}
 	
 	public static float clamp(float var, float min, float max){

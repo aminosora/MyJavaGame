@@ -3,12 +3,11 @@ package com.game.build;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-//import java.util.Random;
 
 public class BasicEnemy extends GameObject {
 
 	private Handler handler;
-	//private Random r;
+	//private Color col;
 	
 	public BasicEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
@@ -17,6 +16,8 @@ public class BasicEnemy extends GameObject {
 		
 		velX = 5;
 		velY = 5;
+		
+		//col = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
 	}
 
 	public void tick() {
