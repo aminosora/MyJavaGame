@@ -69,6 +69,7 @@ public class Menu extends MouseAdapter {
 	
 	public void render(Graphics g){
 		if(game.gameState == STATE.Menu){
+			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 50);
 			
@@ -89,17 +90,41 @@ public class Menu extends MouseAdapter {
 			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 50);
+			Font fnt3 = new Font("arial", 1, 32);
 			
+			//Help Title
 			g.setFont(fnt);
 			g.setColor(Color.white);
 			g.drawString("HELP!", 244, 65);
 			
-			g.setFont(fnt2);
-			g.drawString("How can I help You? :D", 40, 200);
+			//Controls Text
+			g.setFont(fnt3);
+			g.drawString("Use ASWD to move and dodge enemies", 20, 130);
 			
+			//Back Button
 			g.setFont(fnt2);
 			g.drawRect(220, 350, 200, 64);
-			g.drawString("Back", 266, 400);
+			g.drawString("Back", 259, 400);
+			
+			//==============================================================
+			
+			//A key graphics
+			g.setColor(Color.cyan);
+			g.drawRect(215, 250, 64, 64);
+			g.drawString("A", 229, 300);
+			
+			//S key graphics
+			g.drawRect(290, 250, 64, 64);
+			g.drawString("S", 305, 300);
+			
+			//W key graphics
+			g.drawRect(290, 175, 64, 64);
+			g.drawString("W", 299, 225);
+			
+			//D key graphics
+			g.drawRect(365, 250, 64, 64);
+			g.drawString("D", 380, 300);
+			
 		}
 	}
 	
