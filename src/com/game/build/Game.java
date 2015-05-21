@@ -14,6 +14,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private boolean running = false;
 	
+	private int FPS = 80;
+	
 	private Thread thread;
 	private Random r;
 	private Handler handler;
@@ -76,19 +78,24 @@ public class Game extends Canvas implements Runnable {
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
+		double deltaFPS = 0;
+		double FPSNs = 1000000000 / FPS;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		while (running) {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
+			deltaFPS += (now - lastTime) / FPSNs;
 			lastTime = now;
 			while (delta >= 1) {
 				tick();
 				delta--;
 			}
-			if (running)
+			if (running && deltaFPS >= 1){
 				render();
-			frames++;
+				deltaFPS --;
+				frames++;
+			}
 			
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
