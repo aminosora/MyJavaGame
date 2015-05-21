@@ -3,12 +3,10 @@ package com.game.build;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-//import java.util.Random;
 
 public class FastEnemy extends GameObject {
 
 	private Handler handler;
-	//private Random r;
 	
 	public FastEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);

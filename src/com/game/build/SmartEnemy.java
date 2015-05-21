@@ -36,11 +36,11 @@ public class SmartEnemy extends GameObject {
 		//if(y <= 0 || y >= Game.HEIGHT - 50) velY *= -1;
 		//if(x <= 0 || x >= Game.WIDTH - 20) velX *= -1;
 		
-		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, 16, 16, 0.019f, handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 16, 16, 0.019f, handler));
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.magenta);
+		g.setColor(Color.red);
 		g.fillRect((int)x, (int)y, 16, 16);
 	}
 

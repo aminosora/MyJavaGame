@@ -15,6 +15,11 @@ public class Menu extends MouseAdapter {
 	private Handler handler;
 	private Random r = new Random();
 	
+	private int alpha = 70;
+	private int alpha2 = 30;
+	private Color color = new Color(90, 90, 255, alpha);
+	private Color color2 = new Color(0, 255, 255, alpha2);
+	
 	public Menu(Game game, Handler handler){
 		this.game = game;
 		this.handler = handler;
@@ -73,20 +78,38 @@ public class Menu extends MouseAdapter {
 			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 50);
-			
+		
+			//GAME TITLE
 			g.setFont(fnt);
 			g.setColor(Color.white);
+			
 			g.drawString("BloX", 254, 65);
 			
+			//PLAY BUTTON
 			g.setFont(fnt2);
 			g.drawRect(220, 150, 200, 64);
+			g.setColor(color);
+			g.fillRect(220, 150, 200, 64);
+			
+			g.setColor(Color.white);
 			g.drawString("Play", 266, 200);
 			
+			//HELP BUTTON
 			g.drawRect(220, 250, 200, 64);
-			g.drawString("HELP", 252, 300);
+			g.setColor(color);
+			g.fillRect(220, 250, 200, 64);
 			
+			g.setColor(Color.white);
+			g.drawString("HELP", 253, 300);
+			
+			//QUIT BUTTON
 			g.drawRect(220, 350, 200, 64);
+			g.setColor(color);
+			g.fillRect(220, 350, 200, 64);
+			
+			g.setColor(Color.white);
 			g.drawString("Quit", 266, 400);
+			
 		} else if(game.gameState == STATE.Help){
 			
 			Font fnt = new Font("arial", 1, 50);
@@ -105,6 +128,9 @@ public class Menu extends MouseAdapter {
 			//Back Button
 			g.setFont(fnt2);
 			g.drawRect(220, 350, 200, 64);
+			g.setColor(color);
+			g.fillRect(220, 350, 200, 64);
+			g.setColor(Color.white);
 			g.drawString("Back", 259, 400);
 			
 			//==============================================================
@@ -112,18 +138,30 @@ public class Menu extends MouseAdapter {
 			//A key graphics
 			g.setColor(Color.cyan);
 			g.drawRect(215, 250, 64, 64);
+			g.setColor(color2);
+			g.fillRect(215, 250, 64, 64);
+			g.setColor(Color.cyan);
 			g.drawString("A", 229, 300);
 			
 			//S key graphics
 			g.drawRect(290, 250, 64, 64);
+			g.setColor(color2);
+			g.fillRect(290, 250, 64, 64);
+			g.setColor(Color.cyan);
 			g.drawString("S", 305, 300);
 			
 			//W key graphics
 			g.drawRect(290, 175, 64, 64);
+			g.setColor(color2);
+			g.fillRect(290, 175, 64, 64);
+			g.setColor(Color.cyan);
 			g.drawString("W", 299, 225);
 			
 			//D key graphics
 			g.drawRect(365, 250, 64, 64);
+			g.setColor(color2);
+			g.fillRect(365, 250, 64, 64);
+			g.setColor(Color.cyan);
 			g.drawString("D", 380, 300);
 			
 		}
