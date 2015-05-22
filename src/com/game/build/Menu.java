@@ -16,25 +16,27 @@ public class Menu extends MouseAdapter {
 	private Game game;
 	private Handler handler;
 	private Random r = new Random();
+	private HUD hud;
 	
 	private int alpha = 70;
 	private int alpha2 = 30;
 	private Color color = new Color(90, 90, 255, alpha);
 	private Color color2 = new Color(0, 255, 255, alpha2);
 	
-	public Menu(Game game, Handler handler){
+	public Menu(Game game, Handler handler, HUD hud){
 		this.game = game;
 		this.handler = handler;
+		this.hud = hud;
 	}
 	
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
 		
-		if(game.gameState == STATE.Menu){
+		if(Game.gameState == STATE.Menu){
 			//Play Button
 			if(mouseOver(mx, my, 220, 150, 200, 64)){
-				game.gameState = STATE.Game;
+				Game.gameState = STATE.Game;
 				handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
 				handler.clearEnemys();
 				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
@@ -47,15 +49,27 @@ public class Menu extends MouseAdapter {
 			
 			//Help Button
 			if(mouseOver(mx, my, 220, 250, 200, 64)){
-				game.gameState = STATE.Help;
+				Game.gameState = STATE.Help;
 			}
 		}
 		
 		//Back Button For Help
-		if(game.gameState == STATE.Help){
+		if(Game.gameState == STATE.Help){
 			if(mouseOver(mx, my, 220, 350, 200, 64)){
-				game.gameState = STATE.Menu;
+				Game.gameState = STATE.Menu;
 				return;
+			}
+		}
+		
+		//Try Again Button
+		if(Game.gameState == STATE.End){
+			if(mouseOver(mx, my, 220, 350, 200, 64)){
+				Game.gameState = STATE.Game;
+				hud.setLevel(1);
+				hud.setScore(0);
+				handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+				handler.clearEnemys();
+				handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
 			}
 		}
 	}
@@ -76,7 +90,7 @@ public class Menu extends MouseAdapter {
 	}
 	
 	public void render(Graphics g){
-		if(game.gameState == STATE.Menu){
+		if(Game.gameState == STATE.Menu){
 			if(g instanceof Graphics2D){
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -116,7 +130,7 @@ public class Menu extends MouseAdapter {
 			g.setColor(Color.white);
 			g.drawString("Quit", 266, 400);
 			
-		} else if(game.gameState == STATE.Help){
+		} else if(Game.gameState == STATE.Help){
 			if(g instanceof Graphics2D){
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -174,9 +188,35 @@ public class Menu extends MouseAdapter {
 			g.setColor(Color.cyan);
 			g.drawString("D", 380, 300);
 			
-		}
+			//END GAME OVER
+		}else if(Game.gameState == STATE.End){
+			if(g instanceof Graphics2D){
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
+			
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 50);
+			Font fnt3 = new Font("arial", 1, 32);
+			
+			//Help Title
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("Game Over", 180, 65);
+			
+			//Controls Text
+			g.setFont(fnt3);
+			g.drawString("You lost with a Score of: " + hud.getScore(), 77, 150);
+			
+			//Back Button
+			g.setFont(fnt2);
+			g.drawRect(200, 350, 238, 64);
+			g.setColor(color);
+			g.fillRect(200, 350, 238, 64);
+			g.setColor(Color.white);
+			g.drawString("Try Again", 205, 400);
+		}	
+	
 	}
-	
-	
 	
 }
