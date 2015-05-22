@@ -22,7 +22,7 @@ public class Player extends GameObject {
 		
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, 32, 32, 0.07f, handler));
 		
-		HUD.HEALTH += 0.03;
+		HUD.HEALTH += 0.02;
 		
 		collision();
 	}

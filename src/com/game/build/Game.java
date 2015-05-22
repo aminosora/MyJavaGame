@@ -14,7 +14,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private boolean running = false;
 	
-	private int FPS = 80;
+	private int FPS = 100;
 	
 	private Thread thread;
 	private Random r;

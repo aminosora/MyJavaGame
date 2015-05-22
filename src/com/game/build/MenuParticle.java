@@ -16,8 +16,8 @@ public class MenuParticle extends GameObject {
 		
 		this.handler = handler;
 		
-		velX = (r.nextInt(3 - -3) + -3);
-		velY = (r.nextInt(3 - -3) + -3);
+		velX = (r.nextInt(4 - -4) + -4);
+		velY = (r.nextInt(4 - -4) + -4);
 		
 		if(velX == 0){
 			velX = 1;

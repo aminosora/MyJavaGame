@@ -3,6 +3,8 @@ package com.game.build;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
@@ -75,6 +77,10 @@ public class Menu extends MouseAdapter {
 	
 	public void render(Graphics g){
 		if(game.gameState == STATE.Menu){
+			if(g instanceof Graphics2D){
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
 			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 50);
@@ -111,6 +117,10 @@ public class Menu extends MouseAdapter {
 			g.drawString("Quit", 266, 400);
 			
 		} else if(game.gameState == STATE.Help){
+			if(g instanceof Graphics2D){
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			}
 			
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 50);
